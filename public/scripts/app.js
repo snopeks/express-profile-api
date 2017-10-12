@@ -1,7 +1,10 @@
 console.log("Sanity Check: JS is working!");
 
 $(document).ready(function(){
-
-// your code
+  //TODO: make a request to your profile api 
+  // $.ajax({
+  //
+  //
+  // })
 
 });
