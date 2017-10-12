@@ -19,7 +19,7 @@ app.use(function(req, res, next) {
  * DATABASE *
  ************/
 
-// var db = require('./models');
+var db = require('./models');
 
 /**********
  * ROUTES *
@@ -42,6 +42,10 @@ app.get('/', function homepage(req, res) {
  * JSON API Endpoints
  */
 
+app.get('/api/campsites', function campSites(req, res){
+  console.log(req)
+  res.json({campsites: db.Campsite})
+})
 app.get('/api', function apiIndex(req, res) {
   // TODO: Document all your api endpoints below as a simple hardcoded JSON object.
   // It would be seriously overkill to save any of this to your database.
@@ -58,6 +62,19 @@ app.get('/api', function apiIndex(req, res) {
   })
 });
 
+app.get('/api/profile', function apiProfile(req, res){
+  console.log("you made it into the profile api route!")
+  console.log(req.params)
+  res.json({
+    name: 'Stephanie Snopek',
+    github: "https://github.com/snopeks",
+    linkedIn: "https://www.linkedin.com/in/snopeks/",
+    favFood: "ice-cream!",
+    petName: "River",
+    species: "felis catus",
+    hobbies: "so many"
+  })
+})
 /**********
  * SERVER *
  **********/
