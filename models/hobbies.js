@@ -5,6 +5,6 @@ var HobbySchema = new Schema({
   hobby: String
 });
 
-var Hobbies = mongoose.model('Hobbies', HobbySchema);
+var HobbiesCollection = mongoose.model('Hobbies', HobbySchema);
 
-module.exports = Hobbies;
+module.exports = HobbiesCollection;
