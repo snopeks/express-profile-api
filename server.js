@@ -43,9 +43,10 @@ app.get('/', function homepage(req, res) {
  */
 
 app.get('/api/campsites', function campSites(req, res){
-  console.log(req)
-  res.json({campsites: db.Campsite})
+  // console.log(data)
+  res.json({campsites: "campsites"})
 })
+
 app.get('/api', function apiIndex(req, res) {
   // TODO: Document all your api endpoints below as a simple hardcoded JSON object.
   // It would be seriously overkill to save any of this to your database.
@@ -61,7 +62,7 @@ app.get('/api', function apiIndex(req, res) {
     ]
   })
 });
-
+//GET MY PROFILE DATA AND RETURN AS JSON
 app.get('/api/profile', function apiProfile(req, res){
   console.log("you made it into the profile api route!")
   console.log(req.params)
@@ -73,6 +74,50 @@ app.get('/api/profile', function apiProfile(req, res){
     petName: "River",
     species: "felis catus",
     hobbies: "so many"
+  })
+})
+///TODO: GET ALL HOBBIES
+app.get('/api/hobbies', function getAllHobbies(req, res){
+  db.HobbiesCollection.find({}, { hobby: true })
+  .exec(function getAllHobbies(err, allHobbies){
+    if(err) { return console.log("index error: " + err); }
+    res.json(allHobbies)
+  });
+});
+//TODO: GET ONE HOBBY
+app.get('/api/hobbies/:id', function getOneHobby(req, res){
+  console.log(req)
+  res.json({
+    hobby: "view one hobby"
+  })
+});
+
+//POST A NEW HOBBY TO THE HOBBY RESOURCE
+app.post('/api/hobbies', function addHobby(req, res){
+  console.log(req.body.hobby)
+  //the "hobby" part comes from the name i set in index.html
+  db.HobbiesCollection.create(req.body, function (err, createdHobby){
+    if (err){
+      return console.log("could not create new hobby!", err)
+    }
+    res.json({
+      newHobby: createdHobby.hobby
+    })
+  })
+});
+
+//TODO: UPDATE HOBBY
+app.put('/', function updateHobby(req, res){
+  console.log(req.params)
+  res.json({
+    updatedHobby: "the updated hobby"
+  })
+})
+//TODO: DELETE HOBBY
+app.delete('/', function deleteHobby(req, res){
+  console.log(req)
+  res.json({
+    deletedHobby: "the hobby I deleted"
   })
 })
 /**********
